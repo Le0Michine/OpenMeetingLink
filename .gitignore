@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/OpenMeetingLinkAddIn/bin/Debug
+/OpenMeetingLinkAddIn/obj/Debug
+/.vs/OpenMeetingLinkAddIn/v14
