@@ -6,7 +6,7 @@ using System.Xml.Linq;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 
-namespace OpenMeetingLinkAddIn
+namespace OpenLocationLinkAddIn
 {
   public partial class ThisAddIn
   {
@@ -22,7 +22,7 @@ namespace OpenMeetingLinkAddIn
 
     protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
     {
-      return new GotoMeetingLinkRibbon();
+      return new GotoLocationLinkRibbon();
     }
 
     #region VSTO generated code

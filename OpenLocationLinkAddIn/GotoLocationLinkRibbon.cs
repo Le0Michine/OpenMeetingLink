@@ -12,7 +12,7 @@ using Office = Microsoft.Office.Core;
 
 //  protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
 //  {
-//      return new GotoMeetingLinkRibbon();
+//      return new GotoLocationLinkRibbon();
 //  }
 
 // 2. Create callback methods in the "Ribbon Callbacks" region of this class to handle user
@@ -25,18 +25,18 @@ using Office = Microsoft.Office.Core;
 // For more information, see the Ribbon XML documentation in the Visual Studio Tools for Office Help.
 
 
-namespace OpenMeetingLinkAddIn
+namespace OpenLocationLinkAddIn
 {
   [ComVisible(true)]
-  public class GotoMeetingLinkRibbon : Office.IRibbonExtensibility
+  public class GotoLocationLinkRibbon : Office.IRibbonExtensibility
   {
-    public void OpenMeetingLink(Office.IRibbonControl control)
+    private readonly Regex linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    public void OpenLocationLink(Office.IRibbonControl control)
     {
       var explorer = Globals.ThisAddIn.Application.ActiveExplorer();
       if (explorer?.Selection != null && explorer.Selection.Count > 0)
       {
         AppointmentItem currentItem = explorer.Selection[1];
-        Regex linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         foreach (Match match in linkParser.Matches(currentItem.Location))
         {
           System.Diagnostics.Process.Start(match.Value);
@@ -44,11 +44,22 @@ namespace OpenMeetingLinkAddIn
       }
     }
 
+    private bool IsVisible(Office.IRibbonControl control)
+    {
+      var explorer = Globals.ThisAddIn.Application.ActiveExplorer();
+      if (explorer?.Selection != null && explorer.Selection.Count > 0)
+      {
+        AppointmentItem currentItem = explorer.Selection[1];
+        return linkParser.IsMatch(currentItem.Location);
+      }
+      return true;
+    }
+
     #region IRibbonExtensibility Members
 
     public string GetCustomUI(string ribbonID)
     {
-      return GetResourceText("OpenMeetingLinkAddIn.GotoMeetingLinkRibbon.xml");
+      return GetResourceText("OpenLocationLinkAddIn.GotoLocationLinkRibbon.xml");
     }
 
     #endregion

@@ -2,6 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/OpenMeetingLinkAddIn/bin/Debug
-/OpenMeetingLinkAddIn/obj/Debug
+/OpenLocationLinkAddIn/bin/Debug
+/OpenLocationLinkAddIn/obj/Debug
+/.vs/OpenLocationLinkAddIn/v14
+/OpenLocationLinkAddIn/bin
+/OpenLocationLinkAddIn/obj
 /.vs/OpenMeetingLinkAddIn/v14
+/OpenLocationLinkAddInSetup/OpenLocationLinkAddInSetup/Express
